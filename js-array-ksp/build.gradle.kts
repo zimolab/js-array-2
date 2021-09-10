@@ -33,6 +33,7 @@ dependencies {
     implementation(files("libs/formatter.jar"))
 
     implementation(project(":js-array-core"))
+    implementation(kotlin("reflect"))
 
 }
 

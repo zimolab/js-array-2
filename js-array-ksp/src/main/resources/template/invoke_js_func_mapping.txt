@@ -1,0 +1,2 @@
+val ret = eval("{js_code}")
+return mappingReturnValue(ret)

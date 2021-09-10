@@ -13,6 +13,7 @@ import java.io.OutputStream
 import java.util.logging.FileHandler
 import java.util.logging.Level
 import java.util.logging.Logger
+import java.util.regex.Pattern
 import kotlin.reflect.KClass
 
 fun KClass<*>.asKSType(resolver: Resolver) =
@@ -233,4 +234,18 @@ fun TypeSpec.Builder.findFunction(funcName: String, vararg parameterTypes: TypeN
             return null
     }
     return func
+}
+
+fun String.removeLineBreaker(): String {
+    val p = Pattern.compile("[\r\n]")
+    val m = p.matcher(this)
+    return m.replaceAll("")
+}
+
+fun String.of(vararg args: Any?): String {
+    return CodeBlock.of(this, *args).toString()
+}
+
+fun KClass<*>.asTypeName(nullable: Boolean): TypeName {
+    return this.asTypeName().copy(nullable=nullable)
 }

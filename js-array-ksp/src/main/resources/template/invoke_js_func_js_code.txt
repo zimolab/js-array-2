@@ -1,0 +1,4 @@
+{
+    let __tmp__ = this.${js_func_name}(${js_func_args});
+    __tmp__==undefined?null:__tmp__;
+}

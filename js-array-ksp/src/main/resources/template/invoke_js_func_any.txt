@@ -1,0 +1,1 @@
+return eval("{js_code}")

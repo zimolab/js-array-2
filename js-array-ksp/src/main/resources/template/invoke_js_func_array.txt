@@ -1,0 +1,6 @@
+val ret = eval("{js_code}")
+if (ret is JSObject) {
+    if (ret == this.reference)
+        return this
+    return newInstance(ret)
+}

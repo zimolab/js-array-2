@@ -1,0 +1,4 @@
+val ret = eval("{js_code}")
+if(ret is %T)
+    return ret
+throw RuntimeException("return value type is not as expected")
