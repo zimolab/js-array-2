@@ -12,7 +12,7 @@ import org.kotlin.formatter.KotlinFormatter
 
 @Suppress("SameParameterValue")
 @ExperimentalUnsignedTypes
-class JsArrayApis(public val jsArrayType: KSType) {
+class JsArrayApis(val jsArrayType: KSType) {
     val requireMapping = !(TypeUtils.isAnyType(jsArrayType) || TypeUtils.isNativeType(jsArrayType))
 
     companion object {
@@ -43,9 +43,15 @@ class JsArrayApis(public val jsArrayType: KSType) {
                 .build()
         }
 
-        fun funOf(apiName: String, returnType: TypeName, vararg params: Triple<String, TypeName, Boolean>, code: ()->String): FunSpec {
+        fun apiOf(
+            apiName: String,
+            returnType: TypeName,
+            modifies: Array<KModifier> = arrayOf(KModifier.OVERRIDE),
+            vararg params: Triple<String, TypeName, Boolean>,
+            code: () -> String
+        ): FunSpec {
             return FunSpec.builder(apiName)
-                .addModifiers(KModifier.OPEN).apply {
+                .addModifiers(*modifies).apply {
                     params.forEach { (name, type, isVararg)->
                         if (isVararg)
                             addParameter(name, type, KModifier.VARARG)
